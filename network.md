@@ -52,7 +52,7 @@ The diagrams were created using **diagrams.net (draw.io)**.
   - Draw.io file: `./diagrams/branch_network.drawio`  
   - Image: `./diagrams/branch_network.png`  
 
-  ![Branch Network Diagram](./Diagram/Branch_Melbourne(1).jpg)
+  ![Branch Network Diagram](./Diagram/Branch_Melbourne (1).jpg)
 
 
 
