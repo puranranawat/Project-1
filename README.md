@@ -1,10 +1,10 @@
 # COIT20246 Networking and Cyber Security Project
 
-- Group Number: 
+- Group Number: GROUP_NUMBER_HERE
 - Student 1: Abhijit Vijesh Chauhan (12318667)
 - Student 2: Ganga Prashanth Ameti (12317267)
-- Campus: 
-- Tutor: 
+- Campus: CAMPUS_NAME_HERE
+- Tutor: TUTOR_NAME_HERE
 
 ## Project Report
 
