@@ -54,7 +54,7 @@ The diagrams were created using **diagrams.net (draw.io)**.
 
   ![Branch Network Diagram](./diagrams/branch_network.png)
 
-> Note: The repository includes both the exported images and the `.drawio` source files as required.
+
 
 ---
 
@@ -237,34 +237,34 @@ Dedicated WAN subnet for inter-site connectivity:
 
 The following equipment is recommended to meet Truelec’s requirements for performance, security, and scalability. Pricing is approximate in AUD and may vary based on suppliers.
 
-> Note: Product links should point to vendor specification pages or trusted sellers.
+
 
 ---
 
 ### Headquarters (Sydney) Hardware
 
-| Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) | Link |
+| Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) |
 |---|---|---|---:|---:|---|
-| ISP Edge Router | Business-grade router | Gigabit WAN, stable routing | 1 | $250–$800 | (insert link) |
-| Firewall Appliance | pfSense appliance / FortiGate 40F | Stateful firewall, NAT, logging, IPsec VPN | 1 | $800–$2,000 | (insert link) |
-| Core Managed Switch | 24/48 port managed switch | Gigabit switching, managed features | 1 | $500–$2,500 | (insert link) |
-| Access Switches | Managed switches | 24-port Gigabit, reliable throughput | 2 | $250–$900 each | (insert link) |
-| Wireless Access Points | Business WiFi AP | Dual-band 2.4/5 GHz, WPA2/WPA3 | 3–5 | $180–$550 each | (insert link) |
-| Application Servers | Dell/HPE rack/tower server | 8+ CPU cores, 32GB+ RAM, SSD/RAID | 3 | $2,500–$6,000 each | (insert link) |
-| UPS | APC/Equivalent UPS | 1500VA+, surge protection | 2 | $400–$900 each | (insert link) |
+| ISP Edge Router | Business-grade router | Gigabit WAN, stable routing | 1 | $250–$800 |
+| Firewall Appliance | pfSense appliance / FortiGate 40F | Stateful firewall, NAT, logging, IPsec VPN | 1 | $800–$2,000 |
+| Core Managed Switch | 24/48 port managed switch | Gigabit switching, managed features | 1 | $500–$2,500 |
+| Access Switches | Managed switches | 24-port Gigabit, reliable throughput | 2 | $250–$900 each |
+| Wireless Access Points | Business WiFi AP | Dual-band 2.4/5 GHz, WPA2/WPA3 | 3–5 | $180–$550 each |
+| Application Servers | Dell/HPE rack/tower server | 8+ CPU cores, 32GB+ RAM, SSD/RAID | 3 | $2,500–$6,000 each |
+| UPS | APC/Equivalent UPS | 1500VA+, surge protection | 2 | $400–$900 each |
 
 ---
 
 ### Branch Office (Melbourne) Hardware
 
-| Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) | Link |
+| Component | Recommended Hardware | Minimum Specifications | Qty | Estimated Price (AUD) |
 |---|---|---|---:|---:|---|
-| ISP Edge Router | Business-grade router | Gigabit WAN | 1 | $250–$800 | (insert link) |
-| Firewall Appliance | pfSense appliance / FortiGate | IPsec VPN support, policy rules, logging | 1 | $800–$2,000 | (insert link) |
-| Managed Switch | 24-port managed switch | Gigabit switching | 1 | $250–$1,200 | (insert link) |
-| Wireless Access Point | Business WiFi AP | Dual-band, WPA2/WPA3 | 1–2 | $180–$550 each | (insert link) |
-| Branch Server | Entry-level server | 4–8 CPU cores, 16–32GB RAM, SSD | 1 | $2,000–$5,000 | (insert link) |
-| UPS | UPS | 1000–1500VA | 1 | $300–$700 | (insert link) |
+| ISP Edge Router | Business-grade router | Gigabit WAN | 1 | $250–$800 |
+| Firewall Appliance | pfSense appliance / FortiGate | IPsec VPN support, policy rules, logging | 1 | $800–$2,000 |
+| Managed Switch | 24-port managed switch | Gigabit switching | 1 | $250–$1,200 |
+| Wireless Access Point | Business WiFi AP | Dual-band, WPA2/WPA3 | 1–2 | $180–$550 each |
+| Branch Server | Entry-level server | 4–8 CPU cores, 16–32GB RAM, SSD | 1 | $2,000–$5,000 |
+| UPS | UPS | 1000–1500VA | 1 | $300–$700 |
 
 ---
 
