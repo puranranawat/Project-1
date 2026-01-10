@@ -245,13 +245,13 @@ The following equipment is recommended to meet Truelec’s requirements for perf
 
 | Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) |
 |---|---|---|---:|---:|---|
-| ISP Edge Router | Business-grade router | Gigabit WAN, stable routing | 1 | $250–$800 | 
-| Firewall Appliance | pfSense appliance / FortiGate 40F | Stateful firewall, NAT, logging, IPsec VPN | 1 | $800–$2,000 |  
-| Core Managed Switch | 24/48 port managed switch | Gigabit switching, managed features | 1 | $500–$2,500 |  
-| Access Switches | Managed switches | 24-port Gigabit, reliable throughput | 2 | $250–$900 each | 
-| Wireless Access Points | Business WiFi AP | Dual-band 2.4/5 GHz, WPA2/WPA3 | 3–5 | $180–$550 each |  
-| Application Servers | Dell/HPE rack/tower server | 8+ CPU cores, 32GB+ RAM, SSD/RAID | 3 | $2,500–$6,000 each |  
-| UPS | APC/Equivalent UPS | 1500VA+, surge protection | 2 | $400–$900 each | 
+| ISP Edge Router | Business-grade router | Gigabit WAN, stable routing | 1 | $250–$800 |
+| Firewall Appliance | pfSense appliance / FortiGate 40F | Stateful firewall, NAT, logging, IPsec VPN | 1 | $800–$2,000 | 
+| Core Managed Switch | 24/48 port managed switch | Gigabit switching, managed features | 1 | $500–$2,500 |
+| Access Switches | Managed switches | 24-port Gigabit, reliable throughput | 2 | $250–$900 each |
+| Wireless Access Points | Business WiFi AP | Dual-band 2.4/5 GHz, WPA2/WPA3 | 3–5 | $180–$550 each |
+| Application Servers | Dell/HPE rack/tower server | 8+ CPU cores, 32GB+ RAM, SSD/RAID | 3 | $2,500–$6,000 each |
+| UPS | APC/Equivalent UPS | 1500VA+, surge protection | 2 | $400–$900 each |
 
 ---
 
