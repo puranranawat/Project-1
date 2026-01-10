@@ -7,197 +7,274 @@ This section gives the detailed network design.
 
 ## Assumptions
 
-The scenario does not specify all details. The following assumptions were made to complete the network design:
+The scenario does not specify all technical details. The following assumptions are made to complete the network design:
 
-1. **Headquarters (HQ) location (city):** Brisbane, QLD, Australia  
-2. **Branch locations (cities) (minimum 3):**
-   - Sydney, NSW
-   - Melbourne, VIC
-   - Perth, WA
-3. **Number of staff in headquarters:** 65 employees  
-4. **Number of staff in one branch office (designed branch network):** 25 employees (Sydney branch)
+1. **Headquarters (HQ) location:**  
+   Truelec headquarters is located in **Sydney, Australia**.
+
+2. **Branch locations (minimum 3):**  
+   Truelec has branch offices located in:
+   - **Melbourne, Australia**
+   - **Brisbane, Australia**
+   - **Perth, Australia**
+
+3. **Number of staff in HQ:**  
+   The HQ has **70 staff members** (within the required 50–75 range).
+
+4. **Number of staff in one branch office (designed branch network):**  
+   The Melbourne branch has **25 staff members** (within the required 15–30 range).
+
+5. **Internet/WAN availability:**  
+   Each site has an ISP connection capable of supporting business communications and a site-to-site VPN.
+
+6. **Business requirements:**  
+   - HQ hosts core business services including booking application servers and file storage.
+   - Branch staff require secure access to HQ services via VPN.
+   - Guest WiFi must not access internal systems.
 
 ---
 
 ## Network Design Diagrams and Justifications
 
-### Network Design Diagrams (draw.io / diagrams.net)
+The network has been designed for **HQ (Sydney)** and **one Branch office (Melbourne)** using enterprise best practices: perimeter security, segmentation, secure WAN connectivity, and scalable switching.
 
-The network design includes one diagram for the headquarters and one for the Sydney branch office. Both diagrams were created using **draw.io / diagrams.net**.
+### Network Diagrams
 
-- HQ diagram (drawio): `./diagrams/HQ_Network.drawio`
-- Sydney branch diagram (drawio): `./diagrams/Sydney_Branch_Network.drawio`
+The diagrams were created using **diagrams.net (draw.io)**.
 
-> Ensure the drawio files are stored in the GitHub repository and images are embedded below.
+- **HQ Network diagram (Sydney):**  
+  - Draw.io file: `./diagrams/hq_network.drawio`  
+  - Image: `./diagrams/hq_network.png`  
 
-#### Headquarters Network Diagram
-![Headquarters Network Diagram](./diagrams/HQ_Network.png)
+  ![HQ Network Diagram](./diagrams/hq_network.png)
 
-#### Sydney Branch Network Diagram
-![Sydney Branch Network Diagram](./diagrams/Sydney_Branch_Network.png)
+- **Branch Network diagram (Melbourne):**  
+  - Draw.io file: `./diagrams/branch_network.drawio`  
+  - Image: `./diagrams/branch_network.png`  
+
+  ![Branch Network Diagram](./diagrams/branch_network.png)
+
+> Note: The repository includes both the exported images and the `.drawio` source files as required.
 
 ---
 
-### Key Network Design Decisions (Justifications)
+### Key Design Justifications
 
-#### 1) Use of a Perimeter Firewall (HQ and Branch)
-A dedicated perimeter firewall is deployed at both the HQ and the branch edge to:
-- enforce security policies (allow/deny rules),
-- provide application/traffic filtering,
-- support IDS/IPS functions,
-- provide VPN services for site-to-site connectivity.
+#### 1) Perimeter Firewall at Each Site
+A dedicated firewall is placed at HQ and Branch between the ISP router and internal networks.
 
-This improves security by reducing the risk of unauthorised access and helping detect malicious traffic.
+**Justification:**
+- Enforces security policies for inbound/outbound traffic
+- Reduces attack surface
+- Supports intrusion filtering, NAT, logging, and VPN functions
 
-#### 2) Secure Site-to-Site VPN Connectivity (Sydney ↔ HQ)
-A **site-to-site IPsec VPN** connects the Sydney branch to HQ so branch staff can securely access:
-- HQ servers (booking services / internal applications),
-- file storage,
-- authentication services.
+---
 
-This design encrypts traffic across the public internet and reduces the cost compared to a dedicated leased WAN service.
+#### 2) Site-to-Site VPN Between HQ and Branch
+A **site-to-site IPsec VPN** tunnel is implemented between HQ and the Melbourne branch.
 
-#### 3) Segmentation using separate subnets (simple and justifiable)
-To maintain a clear and secure design, the network separates different traffic types into different subnets:
-- Corporate staff devices (wired LAN)
-- Server subnet
-- Staff WiFi subnet
-- Guest WiFi subnet
-- IoT/CCTV subnet
-- Network management subnet
+**Justification:**
+- Protects confidentiality and integrity of traffic over the public internet
+- Allows branch staff to securely access HQ systems
+- Supports secure inter-office communication without leased lines
 
-This improves security and reduces the impact of threats, while avoiding advanced designs that are difficult to justify (e.g., complex VLAN implementations).
+---
 
-#### 4) Dedicated Secure Server Subnet at HQ
-Servers are grouped into a dedicated **HQ server subnet**. Access is restricted via firewall rules:
-- only authorised staff/services can reach servers,
-- guest WiFi and IoT networks cannot access servers directly.
+#### 3) Network Segmentation (Separate Security Zones)
+The design separates devices into multiple zones such as:
+- Staff LAN
+- Server zone (HQ)
+- CCTV/IoT zone
+- Guest WiFi zone
+- Network management zone
 
-This supports confidentiality and integrity of critical systems and data.
+**Justification:**
+- Prevents guest/IoT devices from reaching sensitive systems
+- Limits lateral movement if any endpoint is compromised
+- Enables clearer access control and easier monitoring
 
-#### 5) Guest Network Isolation
-The guest WiFi network is isolated so that:
-- guests can access internet only,
-- guests cannot access internal corporate systems, printers, CCTV or servers.
+---
 
-This reduces risk from unmanaged devices.
+#### 4) Use of Managed Switching
+Managed switches are recommended for both sites.
+
+**Justification:**
+- Improves visibility and control
+- Supports monitoring (SNMP), port shutdown, and secure configuration
+- Allows future expansion (VLAN-ready switching if needed later)
+
+---
+
+#### 5) Hierarchical Topology (Core + Access)
+HQ network uses a structured topology (core switching + access switching).
+
+**Justification:**
+- Scales easily as staff grows
+- Easier troubleshooting and maintenance
+- Supports adding new departments and services with minimal redesign
 
 ---
 
 ## WiFi Design
 
-WiFi is required at both HQ and Sydney branch for staff mobility and productivity, and for controlled guest internet access.
+WiFi is required at HQ and branch to support staff laptops and mobile devices while keeping guest traffic isolated.
 
-### SSIDs
-Two SSIDs are configured at both HQ and branch:
+### SSID Configuration
 
-- Staff SSID: `TRUELEC-STAFF`
-- Guest SSID: `TRUELEC-GUEST`
+Two SSIDs are configured at each site:
 
-### WiFi Security Settings (Important settings and values)
+1. **Staff SSID**
+   - SSID: `TRUELEC-STAFF`
+   - Purpose: Staff corporate devices and authorised users
 
-| WiFi Setting | TRUELEC-STAFF | TRUELEC-GUEST |
+2. **Guest SSID**
+   - SSID: `TRUELEC-GUEST`
+   - Purpose: Visitors/guest internet-only access
+
+---
+
+### Security Settings (with values)
+
+| Setting | TRUELEC-STAFF | TRUELEC-GUEST |
 |---|---|---|
-| SSID | TRUELEC-STAFF | TRUELEC-GUEST |
-| Security Mode | WPA3-Personal (preferred) / WPA2-AES fallback | WPA2-AES |
-| Password Policy | Minimum 12 characters, change every 90 days | Rotated regularly (weekly/monthly) |
-| Network Access | Internal resources allowed | Internet-only |
-| Client Isolation | Not required | Enabled |
-| DHCP | Enabled | Enabled |
-| DNS | Internal DNS (HQ) | Public DNS |
-| Logging/Monitoring | Enabled | Enabled |
+| Encryption | WPA3-Personal (preferred), fallback WPA2-AES | WPA2-AES |
+| Password policy | 12+ characters, changed every semester/term | Separate guest password, changed regularly |
+| Client isolation | Optional (OFF for internal services) | ON (required) |
+| LAN Access | Allowed (controlled through firewall policies) | Blocked |
+| Captive Portal | Not required | Recommended |
+| Band steering | Enabled | Enabled |
 
-### Wireless Performance / Channel Plan
-- Dual-band is enabled: **2.4 GHz + 5 GHz**
-- 5 GHz is preferred for performance and reduced interference
-- 2.4 GHz supports broader coverage and compatibility
-- 2.4 GHz channels set to **1 / 6 / 11** to avoid overlap
-- Access points are placed to cover:
-  - HQ: reception, offices, meeting rooms
-  - Sydney branch: open workspace + meeting room
+---
+
+### Frequency Bands and Channel Plan
+
+- **2.4 GHz band:** higher range, lower throughput (compatibility)
+- **5 GHz band:** higher speed, less congestion (preferred for staff)
+
+Recommended channel widths:
+- 2.4 GHz: **20 MHz**
+- 5 GHz: **40/80 MHz** depending on interference and building layout
+
+---
+
+### Access Point Deployment (high level)
+
+- **HQ:** 3–5 access points depending on floor plan, meeting rooms, and staff density
+- **Branch:** 1–2 access points depending on office size and walls/interference
+
+Access points should be ceiling-mounted near central work areas where possible.
 
 ---
 
 ## Address Allocations
 
-### IP Addressing Requirements (Assessment Rules)
-The addressing plan complies with the assessment rules:
+### IP Addressing Requirement Compliance
+
+This addressing plan meets the assessment rules:
+
 - Only **/16** and **/24** subnet masks are used
-- The first octet (A in A.B.C.D) must be the last two digits of a group member student ID
-- Group member IDs end in **67**, therefore all IP addresses start with **67.x.x.x**
-- Private IP addressing (e.g., 192.168.x.x) is not used anywhere
+- Private IP ranges are **not used** (no `192.168.x.x`, `10.x.x.x`, `172.16.x.x`)
+- The first octet (A in A.B.C.D) must equal the last two digits of a group member student ID  
+  - Both group members’ student IDs end in **67**  
+  - Therefore, all IP addresses use **67.x.x.x**
 
 ---
 
-### Headquarters (Brisbane) IPv4 Address Allocation
+### Headquarters (Sydney) Address Plan
 
-| Network Purpose | IPv4 Range | Mask |
+**HQ supernet:** `67.10.0.0/16`
+
+| HQ Zone | IPv4 Subnet | Default Gateway |
 |---|---|---|
-| HQ Wired Staff LAN | 67.10.0.0/16 | /16 |
-| HQ Servers (Secure Server Subnet) | 67.20.10.0/24 | /24 |
-| HQ Staff WiFi | 67.20.20.0/24 | /24 |
-| HQ Guest WiFi | 67.20.30.0/24 | /24 |
-| HQ IoT / CCTV / RFID | 67.20.40.0/24 | /24 |
-| HQ Network Management (Firewall/Switch/AP Mgmt) | 67.20.50.0/24 | /24 |
+| HQ Staff LAN | `67.10.10.0/24` | `67.10.10.1` |
+| HQ IT/Admin | `67.10.20.0/24` | `67.10.20.1` |
+| HQ Server Zone | `67.10.30.0/24` | `67.10.30.1` |
+| HQ CCTV/IoT | `67.10.40.0/24` | `67.10.40.1` |
+| HQ Guest WiFi | `67.10.50.0/24` | `67.10.50.1` |
+| HQ Network Management | `67.10.60.0/24` | `67.10.60.1` |
+
+Suggested DHCP ranges:
+- HQ Staff LAN: `67.10.10.50` – `67.10.10.220`
+- HQ Guest WiFi: `67.10.50.50` – `67.10.50.230`
+
+Suggested static IPs in HQ Server Zone:
+- App Server 1: `67.10.30.10`
+- App Server 2: `67.10.30.11`
+- Database Server: `67.10.30.12`
+- Backup/File Server: `67.10.30.13`
 
 ---
 
-### Branch (Sydney) IPv4 Address Allocation
+### Branch Office (Melbourne) Address Plan
 
-| Network Purpose | IPv4 Range | Mask |
+**Branch supernet:** `67.20.0.0/16`
+
+| Branch Zone | IPv4 Subnet | Default Gateway |
 |---|---|---|
-| Sydney Wired Staff LAN | 67.30.0.0/16 | /16 |
-| Sydney Staff WiFi | 67.30.10.0/24 | /24 |
-| Sydney Guest WiFi | 67.30.20.0/24 | /24 |
-| Sydney IoT / CCTV | 67.30.30.0/24 | /24 |
-| Sydney Network Management | 67.30.40.0/24 | /24 |
+| Branch Staff LAN | `67.20.10.0/24` | `67.20.10.1` |
+| Branch Local Server | `67.20.20.0/24` | `67.20.20.1` |
+| Branch CCTV/IoT | `67.20.30.0/24` | `67.20.30.1` |
+| Branch Guest WiFi | `67.20.40.0/24` | `67.20.40.1` |
+| Branch Network Management | `67.20.50.0/24` | `67.20.50.1` |
+
+Suggested DHCP ranges:
+- Branch Staff LAN: `67.20.10.50` – `67.20.10.200`
+- Branch Guest WiFi: `67.20.40.50` – `67.20.40.230`
 
 ---
 
-### Site-to-Site VPN Transit Subnet (HQ ↔ Sydney)
-A dedicated VPN transit subnet is allocated for VPN tunnel endpoints:
+### WAN (HQ to Branch VPN Link)
 
-| Network Purpose | IPv4 Range | Mask |
-|---|---|---|
-| VPN Transit Subnet | 67.99.99.0/24 | /24 |
+Dedicated WAN subnet for inter-site connectivity:
 
-Example VPN gateway IPs:
-- HQ VPN gateway: 67.99.99.1
-- Sydney VPN gateway: 67.99.99.2
+| Link | Subnet | HQ Endpoint | Branch Endpoint |
+|---|---|---|---|
+| HQ ↔ Melbourne WAN | `67.254.1.0/24` | `67.254.1.1` | `67.254.1.2` |
 
 ---
 
 ## Recommended Hardware
 
-The following equipment is recommended to support the design. All equipment must be selected with:
-- business-grade reliability,
-- VPN capability,
-- secure firewalling,
-- scalable switching,
-- WiFi 6 access.
+The following equipment is recommended to meet Truelec’s requirements for performance, security, and scalability. Pricing is approximate in AUD and may vary based on suppliers.
 
-> Note: Insert final product links and AUD prices after selecting products from official vendor websites.
-
-### Headquarters (Brisbane) Recommended Hardware
-
-| Equipment | Minimum Specifications | Qty | Price (AUD) | Link |
-|---|---|---:|---:|---|
-| Firewall (NGFW) | IPsec VPN, IDS/IPS, 1Gbps+ throughput, logging | 1 | $____ | (insert link) |
-| Router / Internet Gateway | Business-grade, dual WAN capable | 1 | $____ | (insert link) |
-| Core Switch | 48-port Gigabit Managed Switch, Layer 2 managed features | 1 | $____ | (insert link) |
-| Access Switch | 24-port Gigabit Managed Switch | 2 | $____ | (insert link) |
-| Wireless Access Point (WiFi 6) | Dual-band WiFi 6, PoE support, business-grade | 4–6 | $____ | (insert link) |
-| Server (if hosted on-prem) | 8+ cores CPU, 32GB+ RAM, RAID storage | 1–2 | $____ | (insert link) |
-| UPS | 1000VA+ for firewall/switch/servers | 2 | $____ | (insert link) |
+> Note: Product links should point to vendor specification pages or trusted sellers.
 
 ---
 
-### Branch (Sydney) Recommended Hardware
+### Headquarters (Sydney) Hardware
 
-| Equipment | Minimum Specifications | Qty | Price (AUD) | Link |
-|---|---|---:|---:|---|
-| Firewall (NGFW) | IPsec VPN, IDS/IPS, logging | 1 | $____ | (insert link) |
-| Router / Internet Gateway | Business-grade routing capability | 1 | $____ | (insert link) |
-| Switch | 24-port Gigabit Managed Switch | 1 | $____ | (insert link) |
-| Wireless Access Point (WiFi 6) | Dual-band WiFi 6, PoE | 2 | $____ | (insert link) |
-| UPS | 650VA+ | 1 | $____ | (insert link) |
+| Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) | Link |
+|---|---|---|---:|---:|---|
+| ISP Edge Router | Business-grade router | Gigabit WAN, stable routing | 1 | $250–$800 | (insert link) |
+| Firewall Appliance | pfSense appliance / FortiGate 40F | Stateful firewall, NAT, logging, IPsec VPN | 1 | $800–$2,000 | (insert link) |
+| Core Managed Switch | 24/48 port managed switch | Gigabit switching, managed features | 1 | $500–$2,500 | (insert link) |
+| Access Switches | Managed switches | 24-port Gigabit, reliable throughput | 2 | $250–$900 each | (insert link) |
+| Wireless Access Points | Business WiFi AP | Dual-band 2.4/5 GHz, WPA2/WPA3 | 3–5 | $180–$550 each | (insert link) |
+| Application Servers | Dell/HPE rack/tower server | 8+ CPU cores, 32GB+ RAM, SSD/RAID | 3 | $2,500–$6,000 each | (insert link) |
+| UPS | APC/Equivalent UPS | 1500VA+, surge protection | 2 | $400–$900 each | (insert link) |
+
+---
+
+### Branch Office (Melbourne) Hardware
+
+| Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) | Link |
+|---|---|---|---:|---:|---|
+| ISP Edge Router | Business-grade router | Gigabit WAN | 1 | $250–$800 | (insert link) |
+| Firewall Appliance | pfSense appliance / FortiGate | IPsec VPN support, policy rules, logging | 1 | $800–$2,000 | (insert link) |
+| Managed Switch | 24-port managed switch | Gigabit switching | 1 | $250–$1,200 | (insert link) |
+| Wireless Access Point | Business WiFi AP | Dual-band, WPA2/WPA3 | 1–2 | $180–$550 each | (insert link) |
+| Branch Server | Entry-level server | 4–8 CPU cores, 16–32GB RAM, SSD | 1 | $2,000–$5,000 | (insert link) |
+| UPS | UPS | 1000–1500VA | 1 | $300–$700 | (insert link) |
+
+---
+
+### Cabling and Supporting Equipment (Both Sites)
+
+| Item | Minimum Specification | Estimated Price (AUD) | Notes |
+|---|---|---:|---|
+| Ethernet Cabling | Cat6 certified | $200–$800 | depends on building size |
+| Patch Panel | 24/48 port | $90–$250 | structured cabling |
+| Network Rack | 12U–24U | $250–$900 | secure mounting |
+| Wall ports/keystones | Cat6 compatible | $50–$150 | staff workstation outlets |
+
+---
