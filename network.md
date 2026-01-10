@@ -257,14 +257,14 @@ The following equipment is recommended to meet Truelec’s requirements for perf
 
 ### Branch Office (Melbourne) Hardware
 
-| Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) | Link |
+| Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) |
 |---|---|---|---:|---:|---|
-| ISP Edge Router | Business-grade router | Gigabit WAN | 1 | $250–$800 | (insert link) |
-| Firewall Appliance | pfSense appliance / FortiGate | IPsec VPN support, policy rules, logging | 1 | $800–$2,000 | (insert link) |
-| Managed Switch | 24-port managed switch | Gigabit switching | 1 | $250–$1,200 | (insert link) |
-| Wireless Access Point | Business WiFi AP | Dual-band, WPA2/WPA3 | 1–2 | $180–$550 each | (insert link) |
-| Branch Server | Entry-level server | 4–8 CPU cores, 16–32GB RAM, SSD | 1 | $2,000–$5,000 | (insert link) |
-| UPS | UPS | 1000–1500VA | 1 | $300–$700 | (insert link) |
+| ISP Edge Router | Business-grade router | Gigabit WAN | 1 | $250–$800 |
+| Firewall Appliance | pfSense appliance / FortiGate | IPsec VPN support, policy rules, logging | 1 | $800–$2,000 |
+| Managed Switch | 24-port managed switch | Gigabit switching | 1 | $250–$1,200 |
+| Wireless Access Point | Business WiFi AP | Dual-band, WPA2/WPA3 | 1–2 | $180–$550 each |
+| Branch Server | Entry-level server | 4–8 CPU cores, 16–32GB RAM, SSD | 1 | $2,000–$5,000 |
+| UPS | UPS | 1000–1500VA | 1 | $300–$700 |
 
 ---
 
