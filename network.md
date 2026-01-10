@@ -46,7 +46,7 @@ The diagrams were created using **diagrams.net (draw.io)**.
   - Draw.io file: `./diagrams/hq_network.drawio`  
   - Image: `./diagrams/hq_network.png`  
 
-  ![HQ Network Diagram](./Diagram/HQ_Sydney.png)
+  ![HQ Network Diagram](./Diagram/HQ_Sydney.jpg)
 
 - **Branch Network diagram (Melbourne):**  
   - Draw.io file: `./diagrams/branch_network.drawio`  
