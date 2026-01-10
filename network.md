@@ -244,7 +244,7 @@ The following equipment is recommended to meet Truelec’s requirements for perf
 ### Headquarters (Sydney) Hardware
 
 | Component | Recommended Hardware (Example) | Minimum Specifications | Qty | Estimated Price (AUD) |
-|---|---|---|---:|---:|---|
+|---|---|---|---:|---:|
 | ISP Edge Router | Business-grade router | Gigabit WAN, stable routing | 1 | $250–$800 |
 | Firewall Appliance | pfSense appliance / FortiGate 40F | Stateful firewall, NAT, logging, IPsec VPN | 1 | $800–$2,000 |
 | Core Managed Switch | 24/48 port managed switch | Gigabit switching, managed features | 1 | $500–$2,500 |
@@ -258,7 +258,7 @@ The following equipment is recommended to meet Truelec’s requirements for perf
 ### Branch Office (Melbourne) Hardware
 
 | Component | Recommended Hardware | Minimum Specifications | Qty | Estimated Price (AUD) |
-|---|---|---|---:|---:|---|
+|---|---|---|---:|---:|
 | ISP Edge Router | Business-grade router | Gigabit WAN | 1 | $250–$800 |
 | Firewall Appliance | pfSense appliance / FortiGate | IPsec VPN support, policy rules, logging | 1 | $800–$2,000 |
 | Managed Switch | 24-port managed switch | Gigabit switching | 1 | $250–$1,200 |
