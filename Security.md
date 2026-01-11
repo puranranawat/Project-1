@@ -6,7 +6,7 @@ This section gives a cyber security risk assessment for the company and recommen
 ---
 
 ## Risk Assessment
-[View risk assessment spreadsheet](./risk-assessment.xlsx)
+[View risk assessment spreadsheet](./riskAssessment.xlsx)
 
 ### Mini Risk Assessment Summary
 A mini cyber security risk assessment was conducted for the proposed Truelec network design (HQ Sydney + Branch Melbourne with site-to-site VPN). The assessment was completed using the unit-provided risk assessment template and process.
