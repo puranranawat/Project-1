@@ -81,7 +81,7 @@ The booking application requires:
 Assuming 3 branches (Melbourne, Brisbane, Perth):
 - Branch VMs = 3
 
-✅ Total VMs required:
+ Total VMs required:
 - **6 VMs**
 
 ---
